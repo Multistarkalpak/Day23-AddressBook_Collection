@@ -51,7 +51,29 @@ namespace Day23_CollectionAddressBook
 
         }
 
-        
+        //Method Used To Edit Contacts
+        public void EditContact()
+        {
+            Console.WriteLine("Enter name of contact to edit: ");
+            string name = Console.ReadLine();
+            if (contacts.ContainsKey(name) is true)
+            {
+                Contact tempContact = new Contact();
+                tempContact.GetUserInfo();
+                string editName = tempContact.GetName();
+                if (contacts.ContainsKey(editName) is false || editName == name)
+                {
+                    contacts.Remove(name);
+                    contacts.Add(editName, tempContact);
+                    Console.WriteLine("Successfully Edited And Saved!!!");
+                    Display();
+                }
+                else
+                    Console.WriteLine("Edited name is invalid");
+            }
+            else
+                Console.WriteLine("Name does not exist");
+        }
 
 
         //Method Used To Display The Contacts
