@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day23_CollectionAddressBook
+namespace NewAddressBook
 {
     internal class AddressBook
     {
@@ -30,7 +30,7 @@ namespace Day23_CollectionAddressBook
             }
             else
             {
-                Console.WriteLine("erorr");
+                Console.WriteLine("error");
             }
         }
 
@@ -38,16 +38,29 @@ namespace Day23_CollectionAddressBook
         public void AddContacts()
         {
             tempContact.GetUserInfo();
-            string name = tempContact.GetName();
-            if (contacts.ContainsKey(name) is false)
+            //UC-7 Ensuring No Duplicates
+            try
             {
-                contacts.Add(name, tempContact);
-                Console.WriteLine("Successfully Added A New Contact!!!");
+                if (contacts.Any(e => e.Value.Equals(tempContact)) is false)
+                {
+                    contacts.Add(tempContact.GetName(), tempContact);
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("erorr");
+                Console.WriteLine("Contact already exist\n Please Please Check The Address Book ...");
             }
+
+            //string name = tempContact.GetName();
+            //if (contacts.ContainsKey(name) is false)
+            //{
+            //    contacts.Add(name, tempContact);
+            //    Console.WriteLine("Successfully Added A New Contact!!!");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("error");
+            //}
 
         }
 
@@ -94,7 +107,7 @@ namespace Day23_CollectionAddressBook
             int count = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < count; i++)
             {
-                CreateContact();
+                AddContacts();
             }
             Display();
             Console.WriteLine("Successfully Added New Contacts");
@@ -109,6 +122,19 @@ namespace Day23_CollectionAddressBook
             {
                 contacts[name].Display();
             }
+        }
+    }
+    internal class AdressBookSystem
+    {
+        public Dictionary<string, AddressBook> adressBooks = new Dictionary<string, AddressBook>();
+        public void AddAddressBook()
+        {
+            AddressBook adressBook = new AddressBook();
+            adressBook.AddMultiple();
+            Console.WriteLine("enter the addressbook name");
+            string addressName = Convert.ToString(Console.ReadLine());
+            adressBooks.Add(addressName.ToLower(), adressBook);
+
         }
     }
 }

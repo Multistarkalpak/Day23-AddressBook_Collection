@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day23_CollectionAddressBook
+namespace NewAddressBook
 {
     internal class Contact
     {
@@ -33,7 +33,7 @@ namespace Day23_CollectionAddressBook
             State = Console.ReadLine();
             Console.WriteLine("Enter Zip: ");
             Zip = Console.ReadLine();
-            Console.WriteLine("Enter PhoneNumber: ");
+            Console.WriteLine("Enter PhonNumber: ");
             PhoneNumber = Console.ReadLine();
             Console.WriteLine("Enter EmailId: ");
             EmailId = Console.ReadLine();
@@ -56,6 +56,16 @@ namespace Day23_CollectionAddressBook
         public string GetName()
         {
             return FirstName + " " + LastName;
+        }
+
+        //Creating override equal method
+        public override bool Equals(object obj)
+        {
+            if (!(obj.GetType() is Contact))
+                return false;
+            else if (GetName() == ((Contact)obj).GetName())
+                return true;
+            return false;
         }
     }
 }

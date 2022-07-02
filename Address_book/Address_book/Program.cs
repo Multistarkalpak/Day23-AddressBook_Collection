@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day23_CollectionAddressBook
+namespace NewAddressBook
 {
     internal class Start
     {
@@ -44,7 +44,8 @@ namespace Day23_CollectionAddressBook
                                         break;
 
                                     case 2:
-                                        Console.WriteLine("Adding A New Contact");
+                                        //UC-7
+                                        Console.WriteLine("Adding A New Contact and Ensuring No Duplicates");
                                         adressBookSystem.adressBooks[addressBookName.ToLower()].AddContacts();
                                         adressBookSystem.adressBooks[addressBookName.ToLower()].Display();
                                         Console.WriteLine();
